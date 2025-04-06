@@ -20,6 +20,6 @@
 
 
 ## Nice to haves
--Dice roll sound.
--Health change text animations.
--Animations on notification text on damage taken or dice rolled.
+- Dice roll sound.
+- Health change text animations.
+- Animations on notification text on damage taken or dice rolled.
