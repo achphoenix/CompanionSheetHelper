@@ -5,7 +5,7 @@
 - Add a dropdown to select current number of adjecant enemies.
 - Add button that will roll 1d4 + add the number of adjecant enemies to **ferocity**.
 - Display the text "**RAMPAGE RISK**" when **Ferocity** meets or exceeds 10.
-- Display display how difficult the Animal Handling check is to prevent **RAMPAGE**. (5 + companions current ferocity.)
+- Display how difficult the Animal Handling check is to prevent **RAMPAGE**. (5 + companions current ferocity.)
 - Clearly display what happens when a **RAMPAGE** occurs.
 - Clearly display WHEN **ferocity** is rolled. (Start of turn IF not incapacitated.)
 - Clickable skill buttons that show at a glance what they do, and will minus the required **ferocity** to use the skill when clicked.
