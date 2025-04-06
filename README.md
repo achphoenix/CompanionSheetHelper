@@ -1,6 +1,7 @@
 # Companion Sheet Helper
 ## Must haves
 - Display base attributes of companion (With bonuses from PC level, proficiency, etc, added and text "greened" to show the bonus at a glance.
+- ~~Dropdown to select PC's level. Default 1.~~
 - Display current **Ferocity** in an overrideable box.
 - Add a dropdown to select current number of adjecant enemies.
 - Add button that will roll 1d4 + add the number of adjecant enemies to **ferocity**.

@@ -1,0 +1,47 @@
+body {
+    background-color: #87754c;
+}
+
+h1 {
+    text-align: center;
+}
+
+h4 {
+    margin: 0 0 8 0;
+}
+
+.page-block {
+    width: 46%;
+    margin: 0 1% 0 0;
+    position: relative;
+    height: 100%;
+    padding: 1%;
+}
+
+.left-block {
+    float: left;
+    /* background-color: cadetblue; */
+}
+
+.right-block {
+    float: right;
+    /* background-color: forestgreen; */
+}
+
+.stat-block {
+    background-color: darkgray;
+
+    > h3, p {
+        margin: 3 0 0 0;
+    }
+}
+
+.improved-stat {
+    color: green;
+    cursor: help;
+}
+
+#Player-Character-Level {
+    width: 80px;
+    margin: 0 0 10 0;
+}
