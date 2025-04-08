@@ -12,6 +12,10 @@ addEventListener("DOMContentLoaded", () => {
     elements.Player_Character_Level.addEventListener("change", (event) => {
         PlayerLevelChanged(event);
     });
+
+    elements.Ferocity.addEventListener("change", (event) => {
+        FerocityChanged(event);
+    })
 });
 
 function FetchElements()
@@ -23,6 +27,8 @@ function FetchElements()
     elements.Player_Proficiency = document.getElementById("Player_Proficiency");
     elements.Saving_Throws_Bonus = document.getElementById("Saving_Throws_Bonus");
     elements.Stealth_Skill_Bonus = document.getElementById("Stealth_Skill_Bonus");
+    elements.Ferocity = document.getElementById("Ferocity");
+    elements.Rampage_Risk_Group = document.getElementById("Rampage_Risk_Group");
 }
 
 function DefaultData() {
@@ -35,6 +41,7 @@ function DefaultData() {
     data.Player_Proficiency = (Math.ceil(data.Player_Level / 4) + 1);
     data.Saving_Throws_Bonus = 2 + data.Player_Proficiency; // Dex(1) + 1 + Player Proficiency Bonus
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
+    data.Ferocity = 0;
 }
 
 function InitiateLabels() {
@@ -58,6 +65,10 @@ function InitiateLabels() {
 
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
     elements.Stealth_Skill_Bonus.textContent = data.Stealth_Skill_Bonus;
+
+    // Ferocity
+    elements.Ferocity.value = data.Ferocity;
+    elements.Rampage_Risk_Group.style.display = "none";
 }
 
 
@@ -88,4 +99,11 @@ function PlayerLevelChanged(event) {
 
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
     elements.Stealth_Skill_Bonus.textContent = data.Stealth_Skill_Bonus;
+}
+
+function FerocityChanged(event) {
+    data.Ferocity = event.target.value;
+    if (data.Ferocity >= 10) {
+        elements.Rampage_Risk_Group.style.display = "block";
+    }
 }
