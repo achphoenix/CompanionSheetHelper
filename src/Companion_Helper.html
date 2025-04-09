@@ -4,85 +4,123 @@
 <h1>Kenneth Handler</h1>
 
 <div id="Everything" style="display: none;">
-    <div class="page-block left-block">
-        <h3>Ferocity</h3>
-        <div class="Ferocity-Group">
-            <p><b>Ferocity</b> increases at start of every player turn.</p>
-            <input type="number" id="Ferocity" class="Number-Input">
-            <div id="Rampage_Risk_Group">
-                <p>RAMPAGE RISK!</p>
+    <div class="column">
+        <div class="page-block left-block">
+            <h3>Ferocity</h3>
+            <div class="Ferocity-Group">
+                <p>Number of adjacent enemies:</p>
+                <select id="Adjacent_Enemies_Dropdown" class="Dropdown-Box">
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                </select>
+                <p><b>Ferocity</b> increases at the start of every player turn.</p>
+                <p title="Number of adjacent enemies">1d4 + <span id="Adjacent_Enemies_Label" class="improved-stat"></span></p>
+                <input type="number" id="Ferocity" class="Number-Input">
+                <div class="Ferocity-Increase-Button-Group">
+                    <input type="button" value="1" onclick="IncreaseFerocity(this.value);">
+                    <input type="button" value="2" onclick="IncreaseFerocity(this.value);">
+                    <input type="button" value="3" onclick="IncreaseFerocity(this.value);">
+                    <input type="button" value="4" onclick="IncreaseFerocity(this.value);">
+                </div>
+                <div id="Rampage_Risk_Group">
+                    <p>RAMPAGE RISK!</p>
+                    <p>To avoid <b>Rampage</b>, roll a successful <b>Animal Handling</b> check of <span id="Animal_Handling_Label" class="improved-stat" title="5 + current ferocity">?animal handling?</span></p>
+                    <div class="column">
+                        <div class="page-block left-block">
+                            <p>If failed...</p>
+                            <p>
+                                Immediately move Kenneth's speed towards nearest creature he can sense and attack with <b>signature attack</b> dealing bonus damage equal to 
+                                <span id="Half_Ferocity_Label" class="improved-stat" title="Half of current ferocity"></span> 
+                            </p>
+                        </div>
+                        <div class="page-block right-block">
+                            <p>If succeeded...</p>
+                            <p>Resist the <b>Rampage...</b> for now.</p>
+                        </div>
+                    </div>
+                    <div>
+                        <input type="button" value="End Rampage">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    
+        <div class="page-block right-block">
+            <h3>Player Character Level:</h3>
+            <select id="Player_Character_Level" class="Dropdown-Box">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+            </select>
+            <span>Proficiency Bonus: </span> <span id="Player_Proficiency" class="improved-stat">?Proficiency?</span>
 
-    <div class="page-block right-block">
-        <h3>Player Character Level:</h3>
-        <select id="Player_Character_Level">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-        </select>
-        <span>Proficiency Bonus: </span> <span id="Player_Proficiency" class="improved-stat">?Proficiency?</span>
+            <div class="stat-block">
+                <h3>Stats</h3>
 
-        <div class="stat-block">
-            <h3>Stats</h3>
+                <p><span>AC: </span><span id="Armor_Class_Label" class="improved-stat">?Armor_Class?</span></p>
+                <p>
+                    <span>Health: </span> 
+                    <input id="Current_Health" class="Number-Input" type="number" placeholder="?Health?">
+                    <span class="improved-stat">/</span> 
+                    <span id="Max_Hit_Points_Label" class="improved-stat">?Max_Health?</span>
+                </p>
+                <p>
+                    <input type="button" value="Damage" id="Damage_Button" onclick="Damage();">
+                    <input id="Damage_Input" class="Number-Input" type="number" value="0" onclick="this.value = ''">
+                    <input type="button" value="Heal" id="Healing_Button" onclick="Heal();">
+                    <input id="Healing_Input" class="Number-Input" type="number" value="0" onclick="this.value = ''">
+                </p>
+                <p>Speed: 30 ft.</p>
+                <br>
 
-            <p><span>AC: </span><span id="Armor_Class_Label" class="improved-stat">?Armor_Class?</span></p>
-            <p>
-                <span>Health: </span> 
-                <input id="Current_Health" class="Number-Input" type="number" placeholder="?Health?">
-                <span class="improved-stat">/</span> 
-                <span id="Max_Hit_Points_Label" class="improved-stat">?Max_Health?</span>
-            </p>
-            <p>
-                <label for="Damage_Input">Damage: </label>
-                <input id="Damage_Input" class="Number-Input" type="number">
-                <label for="Healing_Input">Heal: </label>
-                <input id="Healing_Input" class="Number-Input" type="number">
-            </p>
-            <p>Speed: 30 ft.</p>
-            <br>
+                <div>
+                    <div class="page-block left-block">
+                        <p>STR: 16(+3)</p>
+                        <p>DEX: 12(+1)</p>
+                        <p>CON: 15(+2)</p>
+                        <p>INT: 5(-3)</p>
+                        <p>WIS: 12(+1)</p>
+                        <p>CHA: 8(-1)</p>
+                    </div>
 
-            <div>
-                <div class="page-block left-block">
-                    <p>STR: 16(+3)</p>
-                    <p>DEX: 12(+1)</p>
-                    <p>CON: 15(+2)</p>
-                    <p>INT: 5(-3)</p>
-                    <p>WIS: 12(+1)</p>
-                    <p>CHA: 8(-1)</p>
+                    <div class="page-block right-block">
+                        <p>Saving Throws: <span id="Saving_Throws_Bonus" class="improved-stat" title="Dex(+1) + 1 + Player Proficiency Bonus">?Saving Throws Bonus?</span></p>
+                        <p>Skills: Stealth: <span id="Stealth_Skill_Bonus" class="improved-stat" title="1 + Player Proficiency Bonus"></span></p>
+                        <p>Damage Immunities: <u>Acid</u></p>
+                        <p>Condition Immunities: <u>Prone</u></p>
+                        <p>Senses: <u>Darkvision 60ft. Passive Perception: 11</u></p>
+                    </div>
                 </div>
+                <br/>
 
-                <div class="page-block right-block">
-                    <p>Saving Throws: <span id="Saving_Throws_Bonus" class="improved-stat" title="Dex(+1) + 1 + Player Proficiency Bonus">?Saving Throws Bonus?</span></p>
-                    <p>Skills: Stealth: <span id="Stealth_Skill_Bonus" class="improved-stat" title="1 + Player Proficiency Bonus"></span></p>
-                    <p>Damage Immunities: <u>Acid</u></p>
-                    <p>Condition Immunities: <u>Prone</u></p>
-                    <p>Senses: <u>Darkvision 60ft. Passive Perception: 11</u></p>
-                </div>
+                <h3>Special Abilities</h3>
+                <p><b>Shapechanger.</b> The mimic can use their action to polymorph into a Small, Medium, or Large object or back into their true amorphous form. Other than size, the mimic's statistics are the same in each form. Anything they are wearing or carrying isn't transformed. They revert to their true from if they die.</p>
+                <p><b>False Appearance (Object Form Only.)</b> While the mimic remains motionless,  they are indistinguishable from an ordinary object.</p>
             </div>
-            <br/>
-
-            <h3>Special Abilities</h3>
-            <p><b>Shapechanger.</b> The mimic can use their action to polymorph into a Small, Medium, or Large object or back into their true amorphous form. Other than size, the mimic's statistics are the same in each form. Anything they are wearing or carrying isn't transformed. They revert to their true from if they die.</p>
-            <p><b>False Appearance (Object Form Only.)</b> While the mimic remains motionless,  they are indistinguishable from an ordinary object.</p>
         </div>
     </div>
 </div>

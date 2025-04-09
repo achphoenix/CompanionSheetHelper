@@ -14,7 +14,11 @@ addEventListener("DOMContentLoaded", () => {
     });
 
     elements.Ferocity.addEventListener("change", (event) => {
-        FerocityChanged(event);
+        FerocityManuallyChanged(event);
+    })
+
+    elements.Adjacent_Enemies_Dropdown.addEventListener("change", (event) => {
+        AdjacentEnemiesChanged(event);
     })
 });
 
@@ -29,6 +33,12 @@ function FetchElements()
     elements.Stealth_Skill_Bonus = document.getElementById("Stealth_Skill_Bonus");
     elements.Ferocity = document.getElementById("Ferocity");
     elements.Rampage_Risk_Group = document.getElementById("Rampage_Risk_Group");
+    elements.Damage_Input = document.getElementById("Damage_Input");
+    elements.Healing_Input = document.getElementById("Healing_Input");
+    elements.Adjacent_Enemies_Dropdown = document.getElementById("Adjacent_Enemies_Dropdown");
+    elements.Adjacent_Enemies_Label = document.getElementById("Adjacent_Enemies_Label");
+    elements.Animal_Handling_Label = document.getElementById("Animal_Handling_Label");
+    elements.Half_Ferocity_Label = document.getElementById("Half_Ferocity_Label");
 }
 
 function DefaultData() {
@@ -42,6 +52,8 @@ function DefaultData() {
     data.Saving_Throws_Bonus = 2 + data.Player_Proficiency; // Dex(1) + 1 + Player Proficiency Bonus
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
     data.Ferocity = 0;
+    data.Adjacent_Enemies_Value = 0;
+    data.Animal_Handling_Check = 5;
 }
 
 function InitiateLabels() {
@@ -69,6 +81,7 @@ function InitiateLabels() {
     // Ferocity
     elements.Ferocity.value = data.Ferocity;
     elements.Rampage_Risk_Group.style.display = "none";
+    elements.Adjacent_Enemies_Label.textContent = data.Adjacent_Enemies_Value;
 }
 
 
@@ -101,9 +114,66 @@ function PlayerLevelChanged(event) {
     elements.Stealth_Skill_Bonus.textContent = data.Stealth_Skill_Bonus;
 }
 
-function FerocityChanged(event) {
+function Heal() {
+    const healValue = elements.Healing_Input.value;
+    if (healValue) {
+        data.Current_Health += parseInt(healValue);
+        if (data.Current_Health > data.Max_Health) {
+            data.Current_Health = data.Max_Health;
+        }
+        elements.Current_Health.value = data.Current_Health;
+        elements.Healing_Input.value = 0;
+        elements.Damage_Input.value = 0;
+    }
+}
+
+function Damage() {
+    const damageValue = elements.Damage_Input.value;
+    if (damageValue) {
+        data.Current_Health -= damageValue;
+        elements.Current_Health.value = data.Current_Health;
+        elements.Damage_Input.value = 0;
+        elements.Healing_Input.value = 0;
+    }
+}
+
+function FerocityManuallyChanged(event) {
     data.Ferocity = event.target.value;
+
+    FerocityChanged();
+}
+
+function FerocityChanged()
+{
+    data.Animal_Handling_Check = 5 + parseInt(data.Ferocity);
+    elements.Animal_Handling_Label.textContent = data.Animal_Handling_Check;
+    elements.Half_Ferocity_Label.textContent = Math.floor(data.Ferocity / 2);
+
+    CheckForRampage();
+}
+
+function AdjacentEnemiesChanged(event) {
+    data.Adjacent_Enemies_Value = event.target.value;
+    elements.Adjacent_Enemies_Label.textContent = data.Adjacent_Enemies_Value;
+}
+
+function IncreaseFerocity(ferocityValue) {
+    data.Ferocity += (parseInt(ferocityValue) + parseInt(data.Adjacent_Enemies_Value));
+    elements.Ferocity.value = data.Ferocity;
+
+    FerocityChanged();
+}
+
+function CheckForRampage() {
     if (data.Ferocity >= 10) {
         elements.Rampage_Risk_Group.style.display = "block";
+        document.querySelectorAll('div.Ferocity-Increase-Button-Group').forEach(
+            el => el.querySelectorAll('input').forEach(
+                el2 => el2.disabled = true
+            )
+        )
+    }
+    else {
+        elements.Rampage_Risk_Group.style.display = "none";
     }
 }

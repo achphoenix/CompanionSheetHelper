@@ -14,6 +14,12 @@ p {
     font-size: 18px;
 }
 
+.column {
+    display: flow-root;
+    padding: 1%;
+    margin-bottom: 10px;
+}
+
 .page-block {
     width: 46%;
     margin: 0 1% 0 0;
@@ -50,7 +56,7 @@ p {
     cursor: help;
 }
 
-#Player_Character_Level {
+.Dropdown-Box {
     width: 50px;
     text-align: center;
     margin: 0 20 10 0;
@@ -83,6 +89,7 @@ input[type=number] {
     color: darkred;
     width: 60px;
     font-size: 22px;
+    margin-bottom: 12px;
 }
 
 .Ferocity-Group {
@@ -94,8 +101,38 @@ input[type=number] {
 }
 
 #Rampage_Risk_Group {
-    > p {
-        font-size: 32px;
+    > p:first-child {
+        font-size: 42px;
         color: darkred;
+    }
+
+    > p {
+        margin: 0 0 3 0;
+    }
+}
+
+#Damage_Button {
+    border-color: red;
+    background-color: gray;
+    color: red;
+    cursor: pointer;
+}
+
+#Healing_Button {
+    border-color: skyblue;
+    background-color: gray;
+    color: skyblue;
+    cursor: pointer;
+}
+
+.Ferocity-Increase-Button-Group {
+    > input[type=button] {
+        width: 40px;
+        height: 32px;
+        color: white;
+        background-color: red;
+        font-size: 20px;
+        padding: 2 0 0 0;
+        margin: 0 5 30 5;
     }
 }
