@@ -6,11 +6,11 @@
 - ~~Add a dropdown to select current number of adjacent enemies.~~
 - ~~Add 4 separate buttons that will add 1,2,3, or 4 + the number of adjacent enemies to **ferocity**.~~
 - ~~Display the text "**RAMPAGE RISK**" when **Ferocity** meets or exceeds 10.~~
-- Display a button for dismissing the **RAMPAGE RISK** prompt.
+- ~~Display a button for dismissing the **RAMPAGE RISK** prompt.~~
 - ~~Display how difficult the Animal Handling check is to prevent **RAMPAGE**. (5 + companions current ferocity.)~~
-- Clearly display what happens when a **RAMPAGE** occurs.
+- ~~Clearly display what happens when a **RAMPAGE** occurs.~~
 - ~~Clearly display WHEN **ferocity** is rolled. (Start of turn IF not incapacitated.)~~
-- Clickable skill buttons that show at a glance what they do, and will minus the required **ferocity** to use the skill when clicked.
+- ~~Clickable skill buttons that show at a glance what they do, and will minus the required **ferocity** to use the skill when clicked.~~
 - ~~List of Traits.~~
 - List of Bonus Actions.
 - ~~Input boxes for healing and damage, like BDnD's.~~
@@ -22,9 +22,9 @@
 
 
 ## Nice to haves
-- Dice roll sound.
 - Health change text animations.
 - Animations on notification text on damage taken or dice rolled.
 - Cool font
 - Dropdown styling
 - Button styling
+- Highlight abilities when can afford

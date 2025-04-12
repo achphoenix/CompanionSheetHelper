@@ -39,6 +39,15 @@ function FetchElements()
     elements.Adjacent_Enemies_Label = document.getElementById("Adjacent_Enemies_Label");
     elements.Animal_Handling_Label = document.getElementById("Animal_Handling_Label");
     elements.Half_Ferocity_Label = document.getElementById("Half_Ferocity_Label");
+    elements.Signature_Attack_Hit_Label = document.getElementById("Signature_Attack_Hit_Label");
+    elements.Signature_Attack_Damage_Label = document.getElementById("Signature_Attack_Damage_Label");
+    elements.Adhesive_Pseudopods_DC_Label = document.getElementById("Adhesive_Pseudopods_DC_Label");
+    elements.Im_You_DC_Label = document.getElementById("Im_You_DC_Label");
+
+}
+
+function SaveData() {
+    
 }
 
 function DefaultData() {
@@ -54,6 +63,10 @@ function DefaultData() {
     data.Ferocity = 0;
     data.Adjacent_Enemies_Value = 0;
     data.Animal_Handling_Check = 5;
+    data.Signature_Attack_Hit_Bonus = 3 + parseInt(data.Player_Proficiency);
+    data.Signature_Attack_Damage = data.Player_Proficiency;
+    data.Adhesive_Pseudopods_DC = 10 + parseInt(data.Player_Proficiency);
+    data.Im_You_DC = 10 + parseInt(data.Player_Proficiency);
 }
 
 function InitiateLabels() {
@@ -82,6 +95,12 @@ function InitiateLabels() {
     elements.Ferocity.value = data.Ferocity;
     elements.Rampage_Risk_Group.style.display = "none";
     elements.Adjacent_Enemies_Label.textContent = data.Adjacent_Enemies_Value;
+
+    // Attacks
+    elements.Signature_Attack_Hit_Label.textContent = data.Signature_Attack_Hit_Bonus;
+    elements.Signature_Attack_Damage_Label.textContent = data.Signature_Attack_Damage;
+    elements.Adhesive_Pseudopods_DC_Label.textContent = data.Adhesive_Pseudopods_DC;
+    elements.Im_You_DC_Label.textContent = data.Im_You_DC;
 }
 
 
@@ -112,6 +131,16 @@ function PlayerLevelChanged(event) {
 
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
     elements.Stealth_Skill_Bonus.textContent = data.Stealth_Skill_Bonus;
+
+    // Attacks
+    data.Signature_Attack_Hit_Bonus = 3 + parseInt(data.Player_Proficiency);
+    elements.Signature_Attack_Hit_Label.textContent = data.Signature_Attack_Hit_Bonus;
+    data.Signature_Attack_Damage = data.Player_Proficiency;
+    elements.Signature_Attack_Damage_Label.textContent = data.Signature_Attack_Damage;
+    data.Adhesive_Pseudopods_DC = 10 + parseInt(data.Player_Proficiency);
+    elements.Adhesive_Pseudopods_DC_Label.textContent = data.Adhesive_Pseudopods_DC;
+    data.Im_You_DC = 10 + parseInt(data.Player_Proficiency);
+    elements.Im_You_DC_Label.textContent = data.Im_You_DC;
 }
 
 function Heal() {
@@ -145,10 +174,8 @@ function FerocityManuallyChanged(event) {
 
 function FerocityChanged()
 {
-    data.Animal_Handling_Check = 5 + parseInt(data.Ferocity);
-    elements.Animal_Handling_Label.textContent = data.Animal_Handling_Check;
-    elements.Half_Ferocity_Label.textContent = Math.floor(data.Ferocity / 2);
-
+    elements.Ferocity.value = data.Ferocity;
+    
     CheckForRampage();
 }
 
@@ -159,21 +186,38 @@ function AdjacentEnemiesChanged(event) {
 
 function IncreaseFerocity(ferocityValue) {
     data.Ferocity += (parseInt(ferocityValue) + parseInt(data.Adjacent_Enemies_Value));
-    elements.Ferocity.value = data.Ferocity;
-
+    
     FerocityChanged();
+}
+
+function SpendFerocity(cost) {
+    if (data.Ferocity >= cost) {
+        data.Ferocity -= cost;
+
+        FerocityChanged();
+    }
 }
 
 function CheckForRampage() {
     if (data.Ferocity >= 10) {
+        data.Animal_Handling_Check = 5 + parseInt(data.Ferocity);
+        elements.Animal_Handling_Label.textContent = data.Animal_Handling_Check;
+        elements.Half_Ferocity_Label.textContent = Math.floor(data.Ferocity / 2);
+
         elements.Rampage_Risk_Group.style.display = "block";
-        document.querySelectorAll('div.Ferocity-Increase-Button-Group').forEach(
-            el => el.querySelectorAll('input').forEach(
-                el2 => el2.disabled = true
-            )
-        )
+        // document.querySelectorAll('div.Ferocity-Increase-Button-Group').forEach(
+        //     el => el.querySelectorAll('input').forEach(
+        //         el2 => el2.disabled = true
+        //     )
+        // )
     }
     else {
         elements.Rampage_Risk_Group.style.display = "none";
     }
+}
+
+function EndRampage() {
+    data.Ferocity = 0;
+
+    FerocityChanged();
 }
