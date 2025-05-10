@@ -12,12 +12,12 @@
 - ~~Clearly display WHEN **ferocity** is rolled. (Start of turn IF not incapacitated.)~~
 - ~~Clickable skill buttons that show at a glance what they do, and will minus the required **ferocity** to use the skill when clicked.~~
 - ~~List of Traits.~~
-- List of Bonus Actions.
+- ~~List of Bonus Actions.~~
 - ~~Input boxes for healing and damage, like BDnD's.~~
-- Cookie to save current data and load it when opening site again.
-- Clearly display what a companion can do when commanded.
-- Clearly display what a companion can/will do on its own.
-- Clearly display what happens at end of combat. (Companion heals based on remaining **Ferocity**.)
+- ~~Cookie to save current data and load it when opening site again.~~
+- ~~Clearly display what a companion can do when commanded.~~
+- ~~Clearly display what a companion can/will do on its own.~~
+- ~~Clearly display what happens at end of combat. (Companion heals based on remaining **Ferocity**.)~~
 
 
 

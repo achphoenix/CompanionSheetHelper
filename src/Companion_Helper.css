@@ -19,6 +19,13 @@ p {
     font-size: 18px;
 }
 
+#Reset_Button {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background-color: dimgray;
+}
+
 .column {
     display: flow-root;
     padding: 5px;

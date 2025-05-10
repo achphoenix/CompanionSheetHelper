@@ -3,24 +3,36 @@ var elements = {};
 
 // On Load
 addEventListener("DOMContentLoaded", () => {
+    LoadSite();
+});
+
+function LoadSite() {
     FetchElements();
-    DefaultData();
+    LoadData();
     InitiateLabels();
 
     document.getElementById("Everything").style.display = "block";
 
     elements.Player_Character_Level.addEventListener("change", (event) => {
         PlayerLevelChanged(event);
+        SaveData();
     });
 
     elements.Ferocity.addEventListener("change", (event) => {
         FerocityManuallyChanged(event);
+        SaveData();
     })
 
     elements.Adjacent_Enemies_Dropdown.addEventListener("change", (event) => {
         AdjacentEnemiesChanged(event);
+        SaveData();
     })
-});
+
+    elements.Current_Health.addEventListener("change", (event) => {
+        CurrentHealthChanged(event);
+        SaveData();
+    })
+}
 
 function FetchElements()
 {
@@ -46,18 +58,35 @@ function FetchElements()
 
 }
 
+function LoadData() {
+    const savedData = localStorage.getItem("PlayerData");
+    if (!savedData) {
+        DefaultData();
+        return;
+    }
+
+    console.log("Loaded saved data");
+    data = JSON.parse(savedData);
+    elements.Player_Character_Level.value = data.Player_Character_Level;
+    elements.Adjacent_Enemies_Dropdown.value = data.Adjacent_Enemies_Value;
+    elements.Ferocity.value = data.Ferocity;
+    elements.Current_Health.value = data.Current_Health;
+}
+
 function SaveData() {
-    
+    localStorage.setItem("PlayerData", JSON.stringify(data));
+    console.log("Data saved");
 }
 
 function DefaultData() {
-    // todo-ah: Get from cookie.
-    data.Player_Level = 1;
+    console.log("Loading default data");
+
+    data.Player_Character_Level = 1;
     data.Player_Proficiency = 2;
-    data.Max_Health = 7 + (7 * data.Player_Level);
+    data.Max_Health = 7 + (7 * data.Player_Character_Level);
     data.Current_Health = data.Max_Health;
     data.Armor_Class = 13 + data.Player_Proficiency;
-    data.Player_Proficiency = (Math.ceil(data.Player_Level / 4) + 1);
+    data.Player_Proficiency = (Math.ceil(data.Player_Character_Level / 4) + 1);
     data.Saving_Throws_Bonus = 2 + data.Player_Proficiency; // Dex(1) + 1 + Player Proficiency Bonus
     data.Stealth_Skill_Bonus = 1 + data.Player_Proficiency;
     data.Ferocity = 0;
@@ -67,6 +96,11 @@ function DefaultData() {
     data.Signature_Attack_Damage = data.Player_Proficiency;
     data.Adhesive_Pseudopods_DC = 10 + parseInt(data.Player_Proficiency);
     data.Im_You_DC = 10 + parseInt(data.Player_Proficiency);
+}
+
+function ResetSite() {
+    localStorage.removeItem("PlayerData");
+    location.reload();
 }
 
 function InitiateLabels() {
@@ -106,14 +140,14 @@ function InitiateLabels() {
 
 function PlayerLevelChanged(event) {
     // Level
-    data.Player_Level = event.target.value;
+    data.Player_Character_Level = event.target.value;
 
     // Player Proficiency
-    data.Player_Proficiency = (Math.ceil(data.Player_Level / 4) + 1)
+    data.Player_Proficiency = (Math.ceil(data.Player_Character_Level / 4) + 1)
     elements.Player_Proficiency.textContent = data.Player_Proficiency;
 
     // Max Health
-    data.Max_Health = 7 + (7 * data.Player_Level);
+    data.Max_Health = 7 + (7 * data.Player_Character_Level);
     elements.Max_Hit_Points_Label.textContent = data.Max_Health;
     elements.Max_Hit_Points_Label.title = "7 + (7 * Player Level)";
 
@@ -153,6 +187,8 @@ function Heal() {
         elements.Current_Health.value = data.Current_Health;
         elements.Healing_Input.value = 0;
         elements.Damage_Input.value = 0;
+
+        SaveData();
     }
 }
 
@@ -163,6 +199,8 @@ function Damage() {
         elements.Current_Health.value = data.Current_Health;
         elements.Damage_Input.value = 0;
         elements.Healing_Input.value = 0;
+
+        SaveData();
     }
 }
 
@@ -182,6 +220,10 @@ function FerocityChanged()
 function AdjacentEnemiesChanged(event) {
     data.Adjacent_Enemies_Value = event.target.value;
     elements.Adjacent_Enemies_Label.textContent = data.Adjacent_Enemies_Value;
+}
+
+function CurrentHealthChanged(event) {
+    data.Current_Health = event.target.value;
 }
 
 function IncreaseFerocity(ferocityValue) {
