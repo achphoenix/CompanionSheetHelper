@@ -205,7 +205,7 @@ function Damage() {
 }
 
 function FerocityManuallyChanged(event) {
-    data.Ferocity = event.target.value;
+    data.Ferocity = parseInt(event.target.value);
 
     FerocityChanged();
 }
