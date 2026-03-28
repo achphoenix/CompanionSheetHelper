@@ -1,6 +1,8 @@
 body {
     background-color: #1a1a1a;
     color: wheat;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -11,12 +13,79 @@ h3 {
     border-bottom: 2px solid silver;
 }
 
+/* Tab System */
+#tab-container {
+    display: flex;
+    height: 100vh;
+}
+
+#tab-sidebar {
+    width: 120px;
+    background-color: #2a2a2a;
+    border-right: 3px solid silver;
+    padding-top: 60px;
+}
+
+#tab-header {
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: lime;
+    background-color: #2a2a2a;
+    border-bottom: 3px solid silver;
+    margin-bottom: 10px;
+}
+
+.tab {
+    padding: 15px 10px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #3a3a3a;
+    border-bottom: 2px solid #1a1a1a;
+    color: wheat;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.tab:hover {
+    background-color: #4a4a4a;
+}
+
+.tab.active {
+    background-color: #1a1a1a;
+    border-left: 5px solid lime;
+}
+
+#content-area {
+    flex: 1;
+    padding: 20px;
+}
+
+.companion-content {
+    display: none;
+}
+
+.companion-content.active {
+    display: block;
+}
+
 h4 {
     margin: 0 0 8 0;
 }
 
 p {
     font-size: 18px;
+}
+
+#Long_Rest_Button {
+    position: absolute;
+    right: 120px;
+    top: 15px;
+    background-color: #4a4a8a;
+    color: wheat;
+    font-weight: bold;
 }
 
 #Reset_Button {
@@ -93,11 +162,13 @@ input[type=number] {
     -moz-appearance: textfield;
 }
 
-#Damage_Input {
+#mimic_Damage_Input,
+#mouther_Damage_Input {
     margin-right: 30px;
 }
 
-#Ferocity {
+#mimic_Ferocity,
+#mouther_Ferocity {
     color: darkred;
     width: 60px;
     font-size: 22px;
@@ -112,7 +183,8 @@ input[type=number] {
     }
 }
 
-#Rampage_Risk_Group {
+#mimic_Rampage_Risk_Group,
+#mouther_Rampage_Risk_Group {
     > p:first-child {
         font-size: 42px;
         color: darkred;
@@ -123,14 +195,16 @@ input[type=number] {
     }
 }
 
-#Damage_Button {
+#mimic_Damage_Button,
+#mouther_Damage_Button {
     border-color: red;
     background-color: gray;
     color: red;
     cursor: pointer;
 }
 
-#Healing_Button {
+#mimic_Healing_Button,
+#mouther_Healing_Button {
     border-color: skyblue;
     background-color: gray;
     color: skyblue;
@@ -167,4 +241,19 @@ input[type=number] {
         font-size: 24px;
         float: right;
         margin-right: 3px;
+}
+
+.Long-Rest-Resource {
+        color: #b19cd9;
+        position: relative;
+        font-size: 20px;
+        font-weight: bold;
+        float: right;
+        margin-right: 3px;
+}
+
+.Action-Block.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
 }
